@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
-import mbm from './images/1992.11.29_meatBeatManifesto_orbital.png';
 import './App.css';
+import data from './dummy_data/data';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data
+    }
+  }
   render() {
+    const {data} = this.state;
     return (
       <div className="App">
         <h1>welcome to concert tickets</h1>
         <div className="ticket">
-          <img src={mbm} alt="ticket" />
+          <img src={require('./images/1990.06.04_depecheMode_nitzerEbb.png')} alt="ticket" />
           <div className="description">
-            meat beat manifesto w/ orbital at masquerade club, atlanta, 1992.
+            {data[0].artists[0]} w/ {data[0].artists[1]} at {data[0].venue}, {data[0].city}, {data[0].date.getFullYear()}.
           </div>
         </div>
       </div>
