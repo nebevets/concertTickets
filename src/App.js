@@ -13,19 +13,27 @@ class App extends Component {
     super(props);
     this.images = importImages(require.context('./images', false, /\.png/));
     this.state = {
-      data
+      data,
+      page: 0
     }
   }
+  nextPage = next => {
+    this.setState({page: next});
+  }
   render() {
-    const {data} = this.state;
+    const {data, page} = this.state;
+    const nextPage = page + 1 >= data.length
+      ? 0
+      : page + 1
     return (
       <div className="App">
         <h1>welcome to concert tickets</h1>
         <div className="ticket">
-          <img src={this.images[data[0].ticket]} alt="ticket" />
+          <img src={this.images[data[page].ticket]} alt="ticket" />
           <div className="description">
-            {data[0].artists[0]} w/ {data[0].artists[1]} at {data[0].venue}, {data[0].city}, {data[0].date.getFullYear()}.
+            {data[page].artists[0]} w/ {data[page].artists[1]} at {data[page].venue}, {data[page].city}, {data[page].date.getFullYear()}.
           </div>
+          <button onClick={() => this.nextPage(nextPage)}>Next</button>
         </div>
       </div>
     );
