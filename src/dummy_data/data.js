@@ -27,7 +27,7 @@ const data = [
             'siouxsie and the banshees',
             'janes addiction'
         ],
-        date: new Date('1990-06-04T14:00:00-05:00'),
+        date: new Date('1991-08-17T14:00:00-05:00'),
         venue: 'walnut creek amphitheater',
         city: 'raleigh',
         state: 'nc',
