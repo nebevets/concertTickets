@@ -8,6 +8,17 @@ const importImages = requireImage => {
     return images;
 }
 
+const Tickets = ({tickets, images}) =>
+  <ul>
+    {tickets.map(item => 
+      <li key={item.id}>
+        <img src={images[item.stub]} alt={item.tour} />
+      </li>
+      )
+    }
+  </ul>
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,12 +40,13 @@ class App extends Component {
       <div className="App">
         <h1>welcome to concert tickets</h1>
         <div className="ticket">
-          <img src={this.images[data[page].ticket]} alt="ticket" />
+          <img src={this.images[data[page].stub]} alt="ticket" />
           <div className="description">
             {data[page].artists[0]} w/ {data[page].artists[1]} at {data[page].venue}, {data[page].city}, {data[page].date.getFullYear()}.
           </div>
           <button onClick={() => this.nextPage(nextPage)}>Next</button>
         </div>
+        <Tickets tickets={data} images={this.images} />
       </div>
     );
   }
