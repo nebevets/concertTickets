@@ -6,8 +6,15 @@ ul{
   position: absolute;
   right: 0;
   top: 0;
-  width: 10vw;
+  width: 15vw;
+  cursor: pointer;
 }
-li img{
+img{
   width: 100%;
+}
+.ticket {
+  position: fixed;
+  width: 65vw;
+  top: 15px;
+  left: 15vw;
 }
