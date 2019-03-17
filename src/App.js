@@ -38,7 +38,6 @@ class App extends Component {
       : page + 1
     return (
       <div className="App">
-        <h1>welcome to concert tickets</h1>
         <div className="ticket">
           <img src={this.images[data[page].stub]} alt="ticket" />
           <div className="description">
