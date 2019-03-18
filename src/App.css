@@ -19,3 +19,21 @@ img{
   top: 15px;
   left: 15vw;
 }
+.artistName {
+  display: inline-block;
+  border-right: 2px dashed;
+  border-left: 4px solid;
+  padding: 5px;
+  margin: 5px;
+  font-weight: bold;
+  background-color: #f0ffff;
+  color: #2f6f6f;
+}
+.location {
+  border-top: 1px solid;
+  color: #112828;
+  font-weight: 300;
+  font-size: larger;
+  margin-top: 10px;
+  background-color: #6fa7a7
+}
