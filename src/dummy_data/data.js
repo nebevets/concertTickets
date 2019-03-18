@@ -11,7 +11,7 @@ const ticketData = [
         city: 'boone',
         state: 'nc',
         stub: '1986.04.13_bangles_hooDooGurus.png',
-        setlist: 'not available',
+        setlist: null,
         notes: 'my first concert. i went because a high school friend had tickets. i remember the lead singer from hoodoo gurus drinking beers on stage and being pretty drunk. they were good though. google "susanna hoffs eyes" to see what i remember about the bangles show. broome-kirk gym has since been demolished. this was my first exposure to appalachian state, my alma mater.'
     },
     {
@@ -26,7 +26,7 @@ const ticketData = [
         city: 'charlotte',
         state: 'nc',
         stub: '1986.07.16_inxs.png',
-        setlist: 'not available',
+        setlist: null,
         notes: 'this was a great show from start to finish...for inxs. the del fuegos sucked. it was so hot in the venue, people passed out and we were drenched with sweat. this ticket was in my pocket the whole time and pretty much looked like this after the show.'
     },
     {
@@ -79,7 +79,7 @@ const ticketData = [
         city: 'atlanta',
         state: 'ga',
         stub: '1992.02.04_shamen_moby.png',
-        setlist: 'not available',
+        setlist: null,
         notes: 'at this time, nobody knew who moby was. his first album wasn\'t even released. he played "go" and it blew me away. he had a simple keyboard and drum machine setup and the most energy of anyone i had seen before. the shamen were in support of boss drum, which had not been release in the us yet. colin had a guitar that had a digital marquee on it that displayed different messages during different songs. mr. c did unique raps for some of the songs. overall, a great show.'
     },
     {

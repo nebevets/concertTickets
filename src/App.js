@@ -8,12 +8,13 @@ const importImages = requireImage => {
     return images;
 }
 
-const Tickets = ({tickets, images, onClick}) =>
+const TicketsList = ({tickets, images, onClick}) =>
   <ul>
-    {tickets.map(item => 
-      <li key={item.id}>
-        <img src={images[item.stub]} alt={item.tour} onClick={() => onClick(item.id)} />
-      </li>
+    {
+      tickets.map(item => 
+        <li key={item.id}>
+          <img src={images[item.stub]} alt={item.tour} onClick={() => onClick(item.id)} />
+        </li>
       )
     }
   </ul>
@@ -21,13 +22,13 @@ const Tickets = ({tickets, images, onClick}) =>
 class App extends Component {
   constructor(props) {
     super(props);
-    this.images = importImages(require.context('./images', false, /\.png/));
+    this.stubImages = importImages(require.context('./images', false, /\.png/));
     this.state = {
       ticketData,
       selectedTicket: ticketData[0].id
     }
   }
-  onClickedTicket = (id) => {
+  selectTicket = (id) => {
     const newTicketId = id;
     this.setState({
         selectedTicket: newTicketId,
@@ -41,12 +42,21 @@ class App extends Component {
     return (
       <div className="App">
         <div className="ticket">
-          <img src={this.images[ticket.stub]} alt="ticket" />
+          <img src={this.stubImages[ticket.stub]} alt="ticket stub" />
           <div className="description">
-            {ticket.artists[0]} w/ {ticket.artists[1]} at {ticket.venue}, {ticket.city}, {ticket.date.getFullYear()}.
+            <div className="artists">{ticket.artists.map((item, index) => <div className="artistName" key={`${ticket.id}.${index}:${item}`}>{item}</div>)}</div>
+            <div className="location">{`${ticket.venue}, ${ticket.city}, ${ticket.state}`}</div>
+            <div className="notes">{ticket.notes}</div>
+            {
+              ticket.setlist
+                ? <div className="setlist">
+                    <a href={ticket.setlist} target="_blank" rel="noopener noreferrer">View Setlist</a>
+                  </div>
+                : null
+            }
           </div>
         </div>
-        <Tickets tickets={ticketData} images={this.images} onClick={this.onClickedTicket}/>
+        <TicketsList tickets={ticketData} images={this.stubImages} onClick={this.selectTicket}/>
       </div>
     );
   }
