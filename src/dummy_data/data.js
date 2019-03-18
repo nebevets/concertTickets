@@ -1,4 +1,4 @@
-const data = [
+const ticketData = [
     {
         id: 1,
         tour: 'in a different light',
@@ -204,4 +204,4 @@ const data = [
     },
 ];
 
-export default data;
+export default ticketData;

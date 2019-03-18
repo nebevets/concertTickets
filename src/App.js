@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import data from './dummy_data/data';
+import ticketData from './dummy_data/data';
 
 const importImages = requireImage => {
     const images = {};
@@ -8,44 +8,45 @@ const importImages = requireImage => {
     return images;
 }
 
-const Tickets = ({tickets, images}) =>
+const Tickets = ({tickets, images, onClick}) =>
   <ul>
     {tickets.map(item => 
       <li key={item.id}>
-        <img src={images[item.stub]} alt={item.tour} />
+        <img src={images[item.stub]} alt={item.tour} onClick={() => onClick(item.id)} />
       </li>
       )
     }
   </ul>
-
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.images = importImages(require.context('./images', false, /\.png/));
     this.state = {
-      data,
-      page: 0
+      ticketData,
+      selectedTicket: ticketData[0].id
     }
   }
-  nextPage = next => {
-    this.setState({page: next});
+  onClickedTicket = (id) => {
+    const newTicketId = id;
+    this.setState({
+        selectedTicket: newTicketId,
+    });
   }
   render() {
-    const {data, page} = this.state;
-    const nextPage = page + 1 >= data.length
-      ? 0
-      : page + 1
+    const {ticketData, selectedTicket} = this.state;
+    const isId = item => item.id === selectedTicket;
+    const [ticket] = ticketData.filter(isId);
+
     return (
       <div className="App">
         <div className="ticket">
-          <img src={this.images[data[page].stub]} alt="ticket" />
+          <img src={this.images[ticket.stub]} alt="ticket" />
           <div className="description">
-            {data[page].artists[0]} w/ {data[page].artists[1]} at {data[page].venue}, {data[page].city}, {data[page].date.getFullYear()}.
+            {ticket.artists[0]} w/ {ticket.artists[1]} at {ticket.venue}, {ticket.city}, {ticket.date.getFullYear()}.
           </div>
-          <button onClick={() => this.nextPage(nextPage)}>Next</button>
         </div>
-        <Tickets tickets={data} images={this.images} />
+        <Tickets tickets={ticketData} images={this.images} onClick={this.onClickedTicket}/>
       </div>
     );
   }
