@@ -13,11 +13,21 @@ img{
   width: 100%;
   max-width: 480px;
 }
+a, a:active, a:visited {
+  color: #6fa7a7;
+  text-decoration: none;
+  font-weight: bolder;
+}
+a:hover {
+  text-decoration: underline;
+  background-color: #2f6f6f;
+  color: #f0ffff; 
+}
 .ticket {
   position: fixed;
   width: 65vw;
   top: 15px;
-  left: 15vw;
+  left: 10vw;
 }
 .artistName {
   display: inline-block;
@@ -35,5 +45,16 @@ img{
   font-weight: 300;
   font-size: larger;
   margin-top: 10px;
-  background-color: #6fa7a7
+  background-color: #6fa7a7;
+  padding: 5px;
+}
+.notes {
+  text-align: left;
+  padding: 10px;
+  background: #f0ffff;
+  border-bottom: 1px dashed;
+}
+.setlist {
+  margin: 10px 0;
+  text-align: right;
 }
