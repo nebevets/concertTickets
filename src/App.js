@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import './App.css';
 import ticketData from './dummy_data/data';
 
-const importImages = requireImage => {
-    const images = {};
-    requireImage.keys().map(item => images[item.replace('./', '')] = requireImage(item));
-    return images;
+const importImages = (requireImage) => {
+    const imagePaths = {};
+    requireImage.keys()
+                .map(fileInfo => imagePaths[fileInfo.replace('./', '')] = requireImage(fileInfo));
+    return imagePaths;
 }
 
 const TicketsList = ({tickets, images, onClick}) =>
   <ul>
     {
-      tickets.map(item => 
-        <li key={item.id}>
-          <img src={images[item.stub]} alt={item.tour} onClick={() => onClick(item.id)} />
+      tickets.map(ticket => 
+        <li key={ticket.id}>
+          <img src={images[ticket.stub]} alt={ticket.tour} onClick={() => onClick(ticket.id)} />
         </li>
       )
     }
@@ -25,32 +26,42 @@ class App extends Component {
     this.stubImages = importImages(require.context('./images', false, /\.png/));
     this.state = {
       ticketData,
-      selectedTicket: ticketData[0].id
+      selectedTicket: ticketData[0]
     }
   }
   selectTicket = (id) => {
-    const newTicketId = id;
+    const {ticketData} = this.state;
+    const thisTicketId = ticket => ticket.id === id;
+    const [selectedTicket] = ticketData.filter(thisTicketId);
     this.setState({
-        selectedTicket: newTicketId,
+        selectedTicket,
     });
   }
   render() {
     const {ticketData, selectedTicket} = this.state;
-    const isId = item => item.id === selectedTicket;
-    const [ticket] = ticketData.filter(isId);
 
     return (
       <div className="App">
         <div className="ticket">
-          <img src={this.stubImages[ticket.stub]} alt="ticket stub" />
+          <img src={this.stubImages[selectedTicket.stub]} alt="ticket stub" />
           <div className="description">
-            <div className="artists">{ticket.artists.map((item, index) => <div className="artistName" key={`${ticket.id}.${index}:${item}`}>{item}</div>)}</div>
-            <div className="location">{`${ticket.venue}, ${ticket.city}, ${ticket.state}`}</div>
-            <div className="notes">{ticket.notes}</div>
+            <div className="artists">
+              {
+                selectedTicket.artists.map((artist, index) => <div className="artistName" key={`${selectedTicket.id}.${index}:${artist}`}>
+                                                                {artist}
+                                                              </div>)
+              }
+            </div>
+            <div className="location">
+              {`${selectedTicket.venue}, ${selectedTicket.city}, ${selectedTicket.state}`}
+            </div>
+            <div className="notes">
+              {selectedTicket.notes}
+            </div>
             {
-              ticket.setlist
+              selectedTicket.setlist
                 ? <div className="setlist">
-                    <a href={ticket.setlist} target="_blank" rel="noopener noreferrer">View Setlist</a>
+                    <a href={selectedTicket.setlist} target="_blank" rel="noopener noreferrer">View Setlist</a>
                   </div>
                 : null
             }
