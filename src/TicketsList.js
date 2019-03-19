@@ -11,4 +11,4 @@ const TicketsList = ({tickets, images, onClick}) =>
     }
   </ul>
 
-  export default TicketsList;
+export default TicketsList;
