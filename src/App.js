@@ -20,15 +20,21 @@ class App extends Component {
     this.state = {
       ticketData,
       selectedTicket: ticketData[0],
-      searchTerm: '',
     }
   }
   searchTickets = (event) => {
     const {searchTerm} = this.state;
     const filteredData = ticketData.filter(ticket => ticket.artists.indexOf(searchTerm) !== -1);
-    this.setState({
-      ticketData: filteredData,
-    });
+    if(!filteredData.length){
+      this.setState({
+        ticketData
+      })
+    }else {
+      this.setState({
+        ticketData: filteredData,
+        selectedTicket: filteredData[0],
+      });
+    }
     event.preventDefault();
   }
   selectTicket = (id) => {
@@ -40,8 +46,7 @@ class App extends Component {
     });
   }
   setSearchTerm = (event) => {
-    const newSearchTerm = event.currentTarget.value;
-    console.log(newSearchTerm);
+    const newSearchTerm = event.currentTarget.value.toLowerCase();
     this.setState({
       searchTerm: newSearchTerm
     });
