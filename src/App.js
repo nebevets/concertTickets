@@ -5,7 +5,6 @@ import Ticket from './Ticket';
 import TicketsList from './TicketsList';
 import searchIcon from './search_icon.png';
 
-
 const importImages = (requireImage) => {
   const imagePaths = {};
   requireImage.keys()
@@ -27,7 +26,8 @@ class App extends Component {
     const filteredData = ticketData.filter(ticket => ticket.artists.indexOf(searchTerm) !== -1);
     if(!filteredData.length){
       this.setState({
-        ticketData
+        ticketData,
+        selectedTicket: ticketData[0],
       })
     }else {
       this.setState({
