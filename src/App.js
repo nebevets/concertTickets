@@ -19,11 +19,14 @@ class App extends Component {
     this.state = {
       ticketData,
       selectedTicket: ticketData[0],
+      inputClass: 'hidden'
     }
   }
   searchTickets = (event) => {
+    event.preventDefault();
     const {searchTerm} = this.state;
-    const filteredData = ticketData.filter(ticket => ticket.artists.indexOf(searchTerm) !== -1);
+    const artistSearch = new RegExp(searchTerm);
+    const filteredData = ticketData.filter(ticket => ticket.artists.join(',').match(artistSearch));
     if(!filteredData.length){
       this.setState({
         ticketData,
@@ -35,7 +38,6 @@ class App extends Component {
         selectedTicket: filteredData[0],
       });
     }
-    event.preventDefault();
   }
   selectTicket = (id) => {
     const {ticketData} = this.state;
@@ -50,18 +52,24 @@ class App extends Component {
     this.setState({
       searchTerm: newSearchTerm
     });
+  }
+  showInput = (event) => {
     event.preventDefault();
+    const {inputClass} = this.state;
+    inputClass === 'hidden'
+      ? this.setState({inputClass: 'slideInput'})
+      : this.setState({inputClass: 'hidden'})
   }
   render() {
-    const {ticketData, selectedTicket} = this.state;
+    const {ticketData, selectedTicket, inputClass} = this.state;
     const imageSrc = this.stubImages[selectedTicket.stub];
 
     return (
       <div className="App">
         <Ticket ticket={selectedTicket} src={imageSrc} />
         <TicketsList tickets={ticketData} images={this.stubImages} onClick={this.selectTicket}/>
-        <form className="searchForm" onSubmit={this.searchTickets}>
-          <img src={searchIcon} alt="search" /><input type="text" onChange={this.setSearchTerm} />
+        <form className="searchForm" onSubmit={this.searchTickets} onBlur={this.showInput} >
+          <img src={searchIcon} alt="search" onClick={this.showInput} /><input className={inputClass} placeholder="artist name" type="text" onChange={this.setSearchTerm} />
         </form>
       </div>
     );

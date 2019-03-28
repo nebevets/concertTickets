@@ -71,3 +71,14 @@ a:hover {
   vertical-align: middle;
   margin-right: 2px;
 }
+.hidden {
+  display: none;
+}
+.slideInput {
+  display: unset;
+  animation: materialize 1.25s;
+}
+@keyframes materialize {
+  from {opacity: 0.001}
+  to {opacity: 1}
+}
