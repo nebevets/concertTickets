@@ -19,8 +19,17 @@ class App extends Component {
     this.state = {
       ticketData,
       selectedTicket: ticketData[0],
-      inputClass: 'hidden'
+      searchInput: false,
+      searchTerm: ''
     }
+  }
+  clearSearch = (event) => {
+    event.preventDefault();
+    this.setState({
+      ticketData,
+      selectedTicket: ticketData[0],
+      searchTerm: '',
+    });
   }
   searchTickets = (event) => {
     event.preventDefault();
@@ -55,21 +64,43 @@ class App extends Component {
   }
   showInput = (event) => {
     event.preventDefault();
-    const {inputClass} = this.state;
-    inputClass === 'hidden'
-      ? this.setState({inputClass: 'slideInput'})
-      : this.setState({inputClass: 'hidden'})
+    this.setState({
+      searchInput: true
+    });
+  }
+  hideInput = (event) => {
+    event.preventDefault();
+    this.setState({
+      searchInput: false
+    });
   }
   render() {
-    const {ticketData, selectedTicket, inputClass} = this.state;
+    const {ticketData, selectedTicket, searchInput, searchTerm} = this.state;
     const imageSrc = this.stubImages[selectedTicket.stub];
 
     return (
       <div className="App">
         <Ticket ticket={selectedTicket} src={imageSrc} />
-        <TicketsList tickets={ticketData} images={this.stubImages} onClick={this.selectTicket}/>
-        <form className="searchForm" onSubmit={this.searchTickets} onBlur={this.showInput} >
-          <img src={searchIcon} alt="search" onClick={this.showInput} /><input className={inputClass} placeholder="artist name" type="text" onChange={this.setSearchTerm} />
+        <TicketsList
+          tickets={ticketData}
+          images={this.stubImages}
+          onClick={this.selectTicket}
+          searchTerm={searchTerm}
+          clearSearch={this.clearSearch}
+        />
+        <form className="searchForm" onSubmit={this.searchTickets} onBlur={this.hideInput} >
+          <img src={searchIcon} alt="search" onClick={this.showInput} />
+          {
+            searchInput
+              ? <input
+                  className='searchInput'
+                  placeholder="artist name"
+                  type="text"
+                  onChange={this.setSearchTerm}
+                  value={searchTerm}
+                />
+              : null
+          }
         </form>
       </div>
     );
