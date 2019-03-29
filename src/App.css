@@ -72,11 +72,7 @@ a:hover {
   margin-right: 2px;
   cursor: pointer;
 }
-.hidden {
-  display: none;
-}
-.slideInput {
-  display: unset;
+.searchInput {
   animation: materialize 1.25s;
 }
 @keyframes materialize {
