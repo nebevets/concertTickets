@@ -58,19 +58,22 @@ a:hover {
   margin: 10px 0;
   text-align: right;
 }
-.searchForm {
+.searchIcon {
+  width: 1em;
+  vertical-align: middle;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+/*
+ */
+.searchArea {
   position: fixed;
   bottom: 1%;
   left: 1%;
   background-color: #f0ffff;
   padding: 5px;
   border-radius: 10px;
-}
-.searchForm img {
-  width: 1em;
-  vertical-align: middle;
-  margin-right: 2px;
-  cursor: pointer;
 }
 .searchInput {
   animation: materialize 1.25s;
