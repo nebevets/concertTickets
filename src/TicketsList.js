@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TicketsList = ({tickets, images, onClick, searchTerm, clearSearch}) =>
+const TicketsList = ({tickets, images, onClick, isFiltered, clearSearch}) =>
   <ul>
     {
       tickets.map(ticket => 
@@ -10,7 +10,7 @@ const TicketsList = ({tickets, images, onClick, searchTerm, clearSearch}) =>
       )
     }
     {
-      searchTerm
+      isFiltered
         ? <li>
             <button onClick={clearSearch}>clear search</button>
           </li>
