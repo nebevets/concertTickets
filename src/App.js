@@ -31,22 +31,26 @@ class App extends Component {
       ticketData,
       selectedTicket: ticketData[0],
       searchTerm: '',
+      isFiltered: false,
     });
   }
   searchTickets = (event) => {
     event.preventDefault();
     this.toggleSearchForm();
-    const {searchTerm, isFiltered} = this.state;
+    const {searchTerm} = this.state;
+    console.log(searchTerm === '');
     const artistSearch = new RegExp(searchTerm);
     const filteredData = ticketData.filter(ticket => ticket.artists.join(',').match(artistSearch));
-    if(!filteredData.length){
+    if(!filteredData.length || searchTerm === ''){
       this.setState({
         ticketData,
         selectedTicket: ticketData[0],
+        searchTerm: '',
+        isFiltered: false,
       })
     }else {
       this.setState({
-        isFiltered: !isFiltered,
+        isFiltered: true,
         ticketData: filteredData,
         selectedTicket: filteredData[0],
       });
