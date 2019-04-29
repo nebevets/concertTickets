@@ -2,9 +2,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Concert tickets
 
->Clone on download this project to your local computer.
+>Clone or download this project to your local computer.
 
->In the project src directory, you run:
+>In the project directory, run:
 
 ### `npm start`
 
