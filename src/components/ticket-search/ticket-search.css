@@ -1,0 +1,21 @@
+.searchIcon {
+  width: 1em;
+  vertical-align: middle;
+  margin-right: 2px;
+  cursor: pointer;
+}
+.searchArea {
+  position: fixed;
+  bottom: 1%;
+  left: 1%;
+  background-color: #f0ffff;
+  padding: 5px;
+  border-radius: 10px;
+}
+.searchInput {
+  animation: materialize 1.25s;
+}
+@keyframes materialize {
+  from {opacity: 0.001}
+  to {opacity: 1}
+}

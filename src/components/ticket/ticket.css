@@ -1,0 +1,44 @@
+.ticket {
+  text-align: center;
+  font-size: 2.5vmin;
+  position: fixed;
+  width: 65vw;
+  top: 1em;
+  left: 10vw;
+}
+.ticket img{
+  width: 100%;
+  max-width: 480px;
+  max-height: 40vh;
+  object-fit: contain;
+}
+.ticket .artistName {
+  display: inline-block;
+  border-right: 2px dashed;
+  border-left: 4px solid;
+  padding: 5px;
+  margin: 5px;
+  font-weight: bold;
+  background-color: #f0ffff;
+  color: #2f6f6f;
+}
+.ticket .location {
+  border-top: 1px solid;
+  color: #112828;
+  font-weight: 300;
+  font-size: smaller;
+  margin-top: 10px;
+  background-color: #6fa7a7;
+  padding: 5px;
+}
+.ticket .notes {
+  text-align: left;
+  padding: 10px;
+  background: #f0ffff;
+  border-bottom: 1px dashed;
+  font-size: 1.75vmax;
+}
+.ticket .setlist {
+  margin: 10px 0;
+  text-align: right;
+}

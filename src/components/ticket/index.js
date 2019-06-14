@@ -1,8 +1,9 @@
+import './ticket.css';
 import React from 'react'; 
 
 const Ticket = ({ticket, src}) => 
   <div className="ticket">
-    <img src={src} alt="ticket stub" />
+    <img className="activeStub" src={src} alt="selected ticket stub" />
     <div className="description">
       <div className="artists">
         {
