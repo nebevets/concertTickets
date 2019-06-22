@@ -4,16 +4,8 @@ import ticketData from '../dummy_data/data';
 import Ticket from './ticket';
 import TicketsList from './ticket-list';
 import SearchArea from './ticket-search';
+import {importImages} from '../helpers';
 
-const importImages = (requireImage) => {
-  const imagePaths = {};
-  requireImage
-    .keys()
-    .map(fileInfo => 
-      imagePaths[fileInfo.replace('./', '')] = requireImage(fileInfo)
-    );
-  return imagePaths;
-}
 
 class App extends Component {
   constructor(props) {
@@ -22,48 +14,40 @@ class App extends Component {
     this.state = {
       selectedTicket: ticketData[0],
       ticketData,
+      isFiltered: false
     };
   }
-  // clearSearch = (event) => {
-  //   event.preventDefault();
-  //   this.setState({
-  //     ticketData,
-  //     selectedTicket: ticketData[0],
-  //     searchTerm: '',
-  //     isFiltered: false,
-  //   });
-  // }
+  clearSearch = (event) => {
+    event.preventDefault();
+    this.setState({
+      ticketData,
+      selectedTicket: ticketData[0],
+      isFiltered: false,
+    }, this.toggleSearchForm);
+  }
   searchTickets(artistName){
-    console.log(artistName);
     const artistSearch = new RegExp(artistName);
     const filteredData = ticketData.filter(ticket => ticket.artists.join(',').match(artistSearch));
-    console.log(filteredData);
-    // if(!filteredData.length || artistName === ''){
-    //   this.setState({
-    //     ticketData,
-    //     selectedTicket: ticketData[0],
-    //     isFiltered: false,
-    //   })
-    // }else {
-    //   this.setState({
-    //     isFiltered: true,
-    //     ticketData: filteredData,
-    //     selectedTicket: filteredData[0],
-    //   });
-    // }
+    if(!filteredData.length || artistName === ''){
+      this.setState({
+        ticketData,
+        selectedTicket: ticketData[0],
+        searchForm: false,
+      });
+    }else {
+      this.setState({
+        isFiltered: true,
+        ticketData: filteredData,
+        selectedTicket: filteredData[0],
+      });
+    }
   }
-  // setFocus = () => {
-  //   const {searchForm} = this.state;
-  //   if (searchForm){
-  //     this.searchInput.focus()
-  //   }
-  // }
-  // toggleSearchForm = () => {
-  //   const {searchForm} = this.state;
-  //   this.setState({
-  //     searchForm: !searchForm
-  //   }, this.setFocus);
-  // }
+  toggleSearchForm = () => {
+    const {searchForm} = this.state;
+    this.setState({
+      searchForm: !searchForm
+    });
+  }
   selectTicket = (id) => {
     const {ticketData} = this.state;
     const thisTicketId = ticket => ticket.id === id;
@@ -72,8 +56,14 @@ class App extends Component {
         selectedTicket,
     });
   }
+  // setFocus = () => {
+  //   const {searchForm} = this.props;
+  //   if (searchForm){
+  //     this.artistInput.focus()
+  //   }
+  // }
   render() {
-    const {selectedTicket, ticketData} = this.state;
+    const {selectedTicket, ticketData, searchForm} = this.state;
     const imageSrc = this.stubImages[selectedTicket.stub];
     return (
       <div className="App">
@@ -83,7 +73,12 @@ class App extends Component {
           images={this.stubImages}
           onClick={this.selectTicket}
         />
-        <SearchArea searchTickets={this.searchTickets.bind(this)}/>
+        <SearchArea
+          searchTickets={this.searchTickets.bind(this)}
+          searchForm={searchForm}
+          toggleSearch={this.toggleSearchForm}
+          clearSearch={this.clearSearch.bind(this)}
+        />
       </div>
     );
   }
