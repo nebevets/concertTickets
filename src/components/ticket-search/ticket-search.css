@@ -1,0 +1,41 @@
+.searchArea {
+  position: fixed;
+  bottom: 1%;
+  left: 1%;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #f0ffff;
+}
+.searchForm{
+  display: inline-block;
+}
+.magnifier{
+  background-image: url(search_icon.png);
+  background-size: 1em;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0.25em;
+}
+.clearSearch{
+  color: #6c6c6c;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  width: 1em;
+  font-size: 0.75em;
+  vertical-align: middle;
+  padding: 0;
+  margin: 0.25em;
+}
+.searchInput {
+  animation: materialize 1.25s;
+  font-size: 0.75em;
+  color: #6c6c6c;
+  vertical-align: middle;
+}
+@keyframes materialize {
+  from {opacity: 0.001}
+  to {opacity: 1}
+}

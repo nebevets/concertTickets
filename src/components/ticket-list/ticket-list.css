@@ -1,0 +1,12 @@
+.ticketList{
+  margin: 0;
+  list-style-type: none;
+  position: absolute;
+  right: 0;
+  width: 15vw;
+  cursor: pointer;
+  padding: 2px;
+}
+.ticketList li > img{
+  width: 100%;
+}

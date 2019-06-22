@@ -1,0 +1,11 @@
+a, a:active, a:visited {
+  color: #6fa7a7;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: small;
+}
+a:hover {
+  text-decoration: underline;
+  background-color: #2f6f6f;
+  color: #f0ffff; 
+}
