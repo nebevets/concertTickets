@@ -19,24 +19,39 @@ class SearchArea extends Component{
     const {artist} = this.state;
     const {searchTickets, searchForm, toggleSearch, clearSearch} = this.props;
     return(      
-      <div className="searchArea">
+      <div className="searchArea" onBlur={toggleSearch}>
         <div className="magnifier" onClick={toggleSearch}></div>
         {
           searchForm && 
-            <form className="searchForm" onSubmit={(event) => {
-                event.preventDefault();
-                searchTickets(artist.toLowerCase());
+            <form
+              className="searchForm"
+              onSubmit={(event) => {
+                  event.preventDefault();
+                  searchTickets(artist.toLowerCase());
+                }
               }
-            }>
+              autoComplete="off"
+            >
               <input
-                ref={(artistInput) => this.artistInput = artistInput}
                 className="searchInput"
                 onChange={this.handleInputChange.bind(this)}
                 name="artist"
                 value={artist}
                 placeholder="artist name"
               /> 
-              <button onClick={clearSearch} className="clearSearch" type="button" title="clear search...">X</button>
+              <button
+                onClick={() => {
+                  this.setState({
+                    artist: ''
+                  }, clearSearch);
+                }
+                }
+                className="clearSearch"
+                type="button"
+                title="clear search..."
+              >
+                X
+              </button>
             </form>
         }
       </div>

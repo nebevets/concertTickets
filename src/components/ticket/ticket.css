@@ -1,5 +1,5 @@
 .ticket {
-  text-align: center;
+  text-align: right;
   font-size: 2.5vmin;
   position: fixed;
   width: 65vw;
@@ -15,6 +15,7 @@
 .ticket .artistName {
   display: inline-block;
   border-right: 2px dashed;
+  border-bottom: 1px solid;
   border-left: 4px solid;
   padding: 5px;
   margin: 5px;
@@ -32,7 +33,7 @@
   padding: 5px;
 }
 .ticket .notes {
-  text-align: left;
+  text-align: justify;
   padding: 10px;
   background: #f0ffff;
   border-bottom: 1px dashed;
