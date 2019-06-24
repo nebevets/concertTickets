@@ -5,6 +5,7 @@ import Ticket from './ticket';
 import TicketsList from './ticket-list';
 import SearchArea from './ticket-search';
 import {importImages} from '../helpers';
+import {consoleGreeting} from '../helpers';
 
 
 class App extends Component {
@@ -17,8 +18,10 @@ class App extends Component {
       isFiltered: false
     };
   }
-  clearSearch = (event) => {
-    event.preventDefault();
+  componentDidMount(){
+    console.log(consoleGreeting());
+  }
+  clearSearch = () => {
     this.setState({
       ticketData,
       selectedTicket: ticketData[0],
@@ -39,14 +42,8 @@ class App extends Component {
         isFiltered: true,
         ticketData: filteredData,
         selectedTicket: filteredData[0],
-      });
+      }, this.toggleSearchForm);
     }
-  }
-  toggleSearchForm = () => {
-    const {searchForm} = this.state;
-    this.setState({
-      searchForm: !searchForm
-    });
   }
   selectTicket = (id) => {
     const {ticketData} = this.state;
@@ -56,12 +53,15 @@ class App extends Component {
         selectedTicket,
     });
   }
-  // setFocus = () => {
-  //   const {searchForm} = this.props;
-  //   if (searchForm){
-  //     this.artistInput.focus()
-  //   }
-  // }
+  toggleSearchForm = () => {
+    const {searchForm} = this.state;
+    const inverseSearchForm = !searchForm
+      ? true
+      : false
+    this.setState({
+      searchForm: inverseSearchForm
+    });
+  }
   render() {
     const {selectedTicket, ticketData, searchForm} = this.state;
     const imageSrc = this.stubImages[selectedTicket.stub];
