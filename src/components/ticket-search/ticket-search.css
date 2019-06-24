@@ -7,35 +7,35 @@
   background-color: #f0ffff;
   box-shadow: 3px 2px 5px 1px #6fa7a7;
 }
-.searchForm{
+.searchArea > * {
+  vertical-align: middle;
+}
+.searchForm, .magnifier{
   display: inline-block;
 }
 .magnifier{
   background-image: url(search_icon.png);
   background-size: 1em;
-  width: 1em;
   height: 1em;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0.25em;
   cursor: pointer;
 }
 .clearSearch{
-  color: #6c6c6c;
   font-weight: bold;
   background-color: transparent;
   border: none;
-  width: 1em;
-  font-size: 0.75em;
-  vertical-align: middle;
   padding: 0;
+}
+.magnifier, .clearSearch{
+  width: 1em;
   margin: 0.25em;
 }
 .searchInput {
   animation: materialize 1.25s;
-  font-size: 0.75em;
+}
+.clearSearch, .searchInput{
   color: #6c6c6c;
-  vertical-align: middle;
+  font-size: 0.75em;
+
 }
 @keyframes materialize {
   from {opacity: 0.001}
