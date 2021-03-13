@@ -16,13 +16,7 @@ export const consoleGreeting = () => {
   let partOfDay = 'day';
   switch(timeOfDay[2]){
     case 'AM':
-      switch(Number(now.getHours())){
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-          partOfDay = 'night';
-          break;
+      switch(Number(timeOfDay[1])){
         case 5:
         case 6:
         case 7:
@@ -31,12 +25,15 @@ export const consoleGreeting = () => {
         case 10:
           partOfDay = 'morning';
           break;
-        default:
+        case 11:
           partOfDay = 'day';
+          break;
+        default:
+          partOfDay ='night' // 12am
       }
       break;
     case 'PM':
-        switch(Number(now.getHours())){
+        switch(Number(timeOfDay[1])){
           case 1:
           case 2:
           case 3:
@@ -51,8 +48,11 @@ export const consoleGreeting = () => {
           case 10:
             partOfDay = 'evening';
             break;
-          default:
+          case 11:
             partOfDay = 'night';
+            break;
+          default:
+            partOfDay = 'day'; // 12pm
         }
         break;
     default:

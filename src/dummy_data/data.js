@@ -186,7 +186,7 @@ const ticketData = [
         state: 'nc',
         stub: '1994.02.25_rush.png',
         setlist: 'https://www.setlist.fm/setlist/rush/1994/charlotte-coliseum-charlotte-nc-2bd610ce.html',
-        notes: 'candlebox was just starting to get noticed...but i did not like them at all. it was basically 30 minutes of the same annoying song. rush, however, never disappoints. they were great live and i enjoyed the show very much. "roll the bones" had a cool visual accompaniment. i was not let down and happy to hear "the tree" and "xanadu" back to back, like on "...exit stage left."' 
+        notes: 'candlebox was just starting to get noticed...but i did not like them at all. it was basically 30 minutes of the same annoying song. rush, however, never disappoints. they were great live and i enjoyed the show very much. "roll the bones" had a cool visual accompaniment. i was not let down and happy to hear "the trees" and "xanadu" back to back, like on "...exit stage left."' 
     },
     {
         id: 13,
