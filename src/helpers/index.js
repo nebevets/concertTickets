@@ -5,7 +5,6 @@ export const importImages = (requireImage) => {
     .forEach(fileInfo => {
       imagePaths[fileInfo.replace('./', '')] = requireImage(fileInfo);
     });
-  console.log(imagePaths)
   return imagePaths;
 }
 export const consoleGreeting = () => {
