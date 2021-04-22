@@ -64,7 +64,7 @@ class App extends Component {
   }
   render() {
     const {selectedTicket, ticketData, searchForm} = this.state;
-    const imageSrc = this.stubImages[selectedTicket.stub];
+    const imageSrc = this.stubImages[selectedTicket.stub].default;
     return (
       <div className="App">
         <Ticket ticket={selectedTicket} src={imageSrc} />
