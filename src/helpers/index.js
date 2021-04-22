@@ -2,9 +2,10 @@ export const importImages = (requireImage) => {
   const imagePaths = {};
   requireImage
     .keys()
-    .map(fileInfo => 
-      imagePaths[fileInfo.replace('./', '')] = requireImage(fileInfo)
-    );
+    .forEach(fileInfo => {
+      imagePaths[fileInfo.replace('./', '')] = requireImage(fileInfo);
+    });
+  console.log(imagePaths)
   return imagePaths;
 }
 export const consoleGreeting = () => {

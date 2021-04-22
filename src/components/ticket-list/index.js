@@ -6,7 +6,7 @@ const TicketList = ({tickets, images, onClick}) =>
     {
       tickets.map(ticket => 
         <li key={ticket.id}>
-          <img src={images[ticket.stub]} alt={ticket.tour} onClick={() => onClick(ticket.id)} />
+          <img src={images[ticket.stub].default} alt={ticket.tour} onClick={() => onClick(ticket.id)} />
         </li>
       )
     }
