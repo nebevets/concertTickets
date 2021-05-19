@@ -1,33 +1,41 @@
-import './ticket.css';
-import React from 'react'; 
+// @flow
 
-const Ticket = ({ticket, src}) => 
+import type { TicketType } from "../../dummy_data/data";
+
+import "./ticket.css";
+import * as React from "react";
+
+const Ticket = ({
+  id,
+  src,
+  artists,
+  venue,
+  city,
+  state,
+  setlist,
+  notes,
+}: TicketType): React.Node => (
   <div className="ticket">
     <img className="activeStub" src={src} alt="selected ticket stub" />
     <div className="description">
       <div className="artists">
-        {
-          ticket.artists.map((artist, index) => <div className="artistName" key={`${ticket.id}.${index}:${artist}`}>
-                                                  {artist}
-                                                </div>)
-        }
+        {artists.map((artist, index) => (
+          <div className="artistName" key={`${id}.${index}:${artist}`}>
+            {artist}
+          </div>
+        ))}
       </div>
-      <div className="location">
-        {
-          `${ticket.venue}, ${ticket.city}, ${ticket.state}`
-        }
-      </div>
-      <div className="notes">
-        {ticket.notes}
-      </div>
-      {
-        ticket.setlist
-          ? <div className="setlist">
-              <a href={ticket.setlist} target="_blank" rel="noopener noreferrer">View Setlist</a>
-            </div>
-          : null
-      }
+      <div className="location">{`${venue}, ${city}, ${state}`}</div>
+      <div className="notes">{notes}</div>
+      {setlist && (
+        <div className="setlist">
+          <a href={setlist} target="_blank" rel="noopener noreferrer">
+            View Setlist
+          </a>
+        </div>
+      )}
     </div>
   </div>
+);
 
-  export default Ticket;
+export default Ticket;
