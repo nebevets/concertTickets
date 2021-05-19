@@ -1,3 +1,16 @@
+export const importImages = (requireImage) => {
+  const imagePaths = {};
+  requireImage
+    .keys()
+    .forEach(
+      (fileInfo) =>
+        (imagePaths[fileInfo.replace("./", "")] = requireImage(fileInfo))
+    );
+  return imagePaths;
+};
+
+const stubImages = importImages(require.context("../images", false, /\.png/));
+
 export const dummyData = [
   {
     id: 1,
@@ -7,7 +20,7 @@ export const dummyData = [
     venue: "broome-kirk gym",
     city: "boone",
     state: "nc",
-    src: "images/1986.04.13_bangles_hooDooGurus.png",
+    src: stubImages["1986.04.13_bangles_hooDooGurus.png"].default,
     setlist: null,
     notes:
       'my first concert. i went because a high school friend had tickets. i remember the lead singer from hoodoo gurus drinking beers on stage and being pretty drunk. they were good though. google "susanna hoffs eyes" to see what i remember about the bangles show. broome-kirk gym has since been demolished. this was my first exposure to appalachian state, my alma mater.',
@@ -20,7 +33,7 @@ export const dummyData = [
     venue: "grady cole center",
     city: "charlotte",
     state: "nc",
-    src: "images/1986.07.16_inxs.png",
+    src: stubImages["1986.07.16_inxs.png"].default,
     setlist: null,
     notes:
       "this was a great show from start to finish...for inxs. the del fuegos sucked. it was so hot in the venue, people passed out and we were drenched with sweat. this ticket was in my pocket the whole time and pretty much looked like this after the show.",
@@ -33,7 +46,7 @@ export const dummyData = [
     venue: "lakewood amphitheater",
     city: "atlanta",
     state: "ga",
-    src: "images/1990.06.04_depecheMode_nitzerEbb.png",
+    src: stubImages["1990.06.04_depecheMode_nitzerEbb.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/depeche-mode/1990/lakewood-amphitheatre-atlanta-ga-5bd60f6c.html",
     notes:
@@ -58,7 +71,9 @@ export const dummyData = [
     venue: "walnut creek amphitheater",
     city: "raleigh",
     state: "nc",
-    src: "images/1991.08.17_lollapalooza1991_nineInchNails_janesAddiction_iceT.png",
+    src: stubImages[
+      "1991.08.17_lollapalooza1991_nineInchNails_janesAddiction_iceT.png"
+    ].default,
     setlist:
       "https://www.setlist.fm/setlist/nine-inch-nails/1991/hardees-walnut-creek-amphitheatre-raleigh-nc-4bd7c332.html",
     notes:
@@ -72,7 +87,7 @@ export const dummyData = [
     venue: "heaven, the masquerade club",
     city: "atlanta",
     state: "ga",
-    src: "images/1992.02.04_shamen_moby.png",
+    src: stubImages["1992.02.04_shamen_moby.png"].default,
     setlist: null,
     notes:
       'at this time, nobody knew who moby was. his first album wasn\'t even released. he played "go" and it blew me away. he had a simple keyboard and drum machine setup and the most energy of anyone i had seen before. the shamen were in support of boss drum, which had not been released in the us yet. colin had a guitar that had a digital marquee on it that displayed different messages during different songs. mr. c did unique raps for some of the songs. overall, a great show.',
@@ -85,7 +100,7 @@ export const dummyData = [
     venue: "heaven, the masquerade club",
     city: "atlanta",
     state: "ga",
-    src: "images/1992.02.06_nitzerEbb.png",
+    src: stubImages["1992.02.06_nitzerEbb.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/nitzer-ebb/1992/university-of-leicester-leicester-england-5b944bc4.html",
     notes:
@@ -99,7 +114,7 @@ export const dummyData = [
     venue: "13-13 club",
     city: "charlotte",
     state: "nc",
-    src: "images/1992.02.07_nitzerEbb.png",
+    src: stubImages["1992.02.07_nitzerEbb.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/nitzer-ebb/1992/university-of-leicester-leicester-england-5b944bc4.html",
     notes:
@@ -113,7 +128,7 @@ export const dummyData = [
     venue: "charlotte coliseum",
     city: "charlotte",
     state: "nc",
-    src: "images/1992.03.03_u2_pixies.png",
+    src: stubImages["1992.03.03_u2_pixies.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/u2/1992/charlotte-coliseum-charlotte-nc-2bd6f832.html",
     notes:
@@ -127,7 +142,7 @@ export const dummyData = [
     venue: "dean e. smith center",
     city: "chapel hill",
     state: "nc",
-    src: "images/1992.05.28_theCure_cranes.png",
+    src: stubImages["1992.05.28_theCure_cranes.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/the-cure/1992/dean-e-smith-student-activities-center-chapel-hill-nc-33d7ec79.html",
     notes:
@@ -141,7 +156,7 @@ export const dummyData = [
     venue: "heaven, the masquerade club",
     city: "atlanta",
     state: "ga",
-    src: "images/1992.11.29_meatBeatManifesto_orbital.png",
+    src: stubImages["1992.11.29_meatBeatManifesto_orbital.png"].default,
     setlist: "not available",
     notes:
       "ultramarine was pretty good live. we could see nothing of orbital expect for their lighted eye glasses cutting through all the dry ice. overall, a great show. the sound quality was spectacular for meat beat. jack had lots of enegry and he tweaked their samples a lot with this vintage roland sampler.",
@@ -154,7 +169,7 @@ export const dummyData = [
     venue: "the omni",
     city: "atlanta",
     state: "ga",
-    src: "images/1993.09.29_depecheMode_theThe.png",
+    src: stubImages["1993.09.29_depecheMode_theThe.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/depeche-mode/1993/the-omni-atlanta-ga-4bd7f38a.html",
     notes:
@@ -168,7 +183,7 @@ export const dummyData = [
     venue: "charlotte coliseum",
     city: "charlotte",
     state: "nc",
-    src: "images/1994.02.25_rush.png",
+    src: stubImages["1994.02.25_rush.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/rush/1994/charlotte-coliseum-charlotte-nc-2bd610ce.html",
     notes:
@@ -182,7 +197,7 @@ export const dummyData = [
     venue: "carowinds paladium",
     city: "charlotte",
     state: "nc",
-    src: "images/1994.06.08_depecheMode_primalScream.png",
+    src: stubImages["1994.06.08_depecheMode_primalScream.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/depeche-mode/1994/carowinds-paladium-charlotte-nc-73d7f2dd.html",
     notes:
@@ -205,7 +220,9 @@ export const dummyData = [
     venue: "blockbuster pavilion",
     city: "charlotte",
     state: "nc",
-    src: "images/1994.08.11_lollapalooza1994_beastieBoys_smashingPumpkins.png",
+    src: stubImages[
+      "1994.08.11_lollapalooza1994_beastieBoys_smashingPumpkins.png"
+    ].default,
     setlist:
       "https://www.setlist.fm/setlist/the-smashing-pumpkins/1994/blockbuster-pavilion-charlotte-nc-63d7cecb.html",
     notes:
@@ -219,7 +236,7 @@ export const dummyData = [
     venue: "ljvm coliseum",
     city: "winston salem",
     state: "nc",
-    src: "images/1994.11.23_nineInchNails_marilynManson.png",
+    src: stubImages["1994.11.23_nineInchNails_marilynManson.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/nine-inch-nails/1994/lawrence-joel-veterans-memorial-coliseum-winston-salem-nc-3bd6d8c8.html",
     notes:
@@ -233,7 +250,7 @@ export const dummyData = [
     venue: "carolina coliseum",
     city: "columbia",
     state: "sc",
-    src: "images/1995.01.25_nineInchNails_PWEI.png",
+    src: stubImages["1995.01.25_nineInchNails_PWEI.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/nine-inch-nails/1995/carolina-coliseum-columbia-sc-5bd7c308.html",
     notes:
@@ -247,7 +264,8 @@ export const dummyData = [
     venue: "dv8",
     city: "seattle",
     state: "wa",
-    src: "images/1995.10.31_myLifeWithTheThrillKillKult_traciLords.png",
+    src: stubImages["1995.10.31_myLifeWithTheThrillKillKult_traciLords.png"]
+      .default,
     setlist: null,
     notes:
       "traci lords with tkk on halloween...should have been amazing, right? not exactly. traci lords is not a good dj. but, it was great to see her in person. tkk was in their heavy disco phase and was not anywhere near as good as when i saw them perform at the pterodactyl club in charlotte a year before. i lost that ticket.",
@@ -260,7 +278,7 @@ export const dummyData = [
     venue: "the gorge",
     city: "george",
     state: "wa",
-    src: "images/1996.08.03_theCure.png",
+    src: stubImages["1996.08.03_theCure.png"].default,
     setlist:
       "https://www.setlist.fm/setlist/the-cure/1996/the-gorge-amphitheatre-george-wa-7bd7eac8.html",
     notes:
@@ -274,7 +292,7 @@ export const dummyData = [
     venue: "the fenix underground",
     city: "seattle",
     state: "wa",
-    src: "images/1996.08.31_download.png",
+    src: stubImages["1996.08.31_download.png"].default,
     setlist: null,
     notes:
       "i was not expecting twilight circus. super chill; not the type of music i was expecting to hear at this show. in sharp contrast, download was like someone grabbed your head by the base of your skull and head-banged it for you. intense.",

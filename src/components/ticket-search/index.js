@@ -1,62 +1,58 @@
-import './ticket-search.css';
-import React, {Component} from 'react';
+import "./ticket-search.css";
+import React, { useState } from "react";
 
-class SearchArea extends Component{
-  constructor(props) {
-    super(props);
-    this.artistInput = null;
-    this.state = {
-      artist: '',
-    };
-  }
-  handleInputChange(event){
-    const {name, value} = event.target;
-    this.setState({
-      [name]: value
+const SearchArea = ({ searchTickets, clearSearch }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [artistInput, setArtistInput] = useState({ artist: "" });
+
+  const toggleSearchForm = () => {
+    setIsExpanded(isExpanded ? false : true);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setArtistInput({
+      [name]: value,
     });
-  }
-  render(){
-    const {artist} = this.state;
-    const {searchTickets, searchForm, toggleSearch, clearSearch} = this.props;
-    return(      
-      <div className="searchArea" onBlur={toggleSearch}>
-        <div className="magnifier" onClick={toggleSearch}></div>
-        {
-          searchForm && 
-            <form
-              className="searchForm"
-              onSubmit={(event) => {
-                  event.preventDefault();
-                  searchTickets(artist.toLowerCase());
-                }
-              }
-              autoComplete="off"
-            >
-              <input
-                className="searchInput"
-                onChange={this.handleInputChange.bind(this)}
-                name="artist"
-                value={artist}
-                placeholder="artist name"
-              /> 
-              <button
-                onClick={() => {
-                  this.setState({
-                    artist: ''
-                  }, clearSearch);
-                }
-                }
-                className="clearSearch"
-                type="button"
-                title="clear search..."
-              >
-                X
-              </button>
-            </form>
-        }
-      </div>
-    );
-  }
-}
+  };
+
+  return (
+    <div className="searchArea" onBlur={toggleSearchForm}>
+      <div className="magnifier" onClick={toggleSearchForm}></div>
+      {isExpanded && (
+        <form
+          className="searchForm"
+          onSubmit={(event) => {
+            event.preventDefault();
+            searchTickets(artistInput.artist.toLowerCase());
+          }}
+          autoComplete="off"
+        >
+          <input
+            className="searchInput"
+            onChange={handleInputChange}
+            name="artist"
+            value={artistInput.artist}
+            placeholder="artist name"
+          />
+          <button
+            onClick={() => {
+              setArtistInput({
+                artist: "",
+              });
+              toggleSearchForm();
+              clearSearch();
+            }}
+            className="clearSearch"
+            type="button"
+            title="clear search..."
+          >
+            X
+          </button>
+        </form>
+      )}
+    </div>
+  );
+};
 
 export default SearchArea;

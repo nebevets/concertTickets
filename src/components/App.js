@@ -7,53 +7,49 @@ import SearchArea from "./ticket-search";
 import { consoleGreeting } from "../helpers";
 
 const App = () => {
-  const [ticketData, setTicketData] = useState(dummyData);
-  const [selectedTicket, setSelectedTicket] = useState(ticketData[0]);
-  const [searchForm, setSearchForm] = useState(false);
+  const [tickets, setTickets] = useState([]);
+  const [selectedTicket, setSelectedTicket] = useState(null);
 
   const clearSearch = () => {
-    setTicketData(ticketData);
-    setSelectedTicket(ticketData[0]);
+    setTickets([...dummyData]);
+    setSelectedTicket(tickets[0]);
   };
 
   const searchTickets = (artistName) => {
     const artistSearch = new RegExp(artistName);
-    const filteredData = ticketData.filter((ticket) =>
+    const filteredData = tickets.filter((ticket) =>
       ticket.artists.join(",").match(artistSearch)
     );
     if (!filteredData.length || artistName === "") {
-      setTicketData(ticketData);
-      setSelectedTicket(ticketData[0]);
-      setSearchForm(false);
+      setTickets(tickets);
     } else {
-      setTicketData(filteredData);
-      setSelectedTicket(filteredData[0]);
+      setTickets(filteredData);
     }
   };
 
   const selectTicket = (id) => {
-    const thisTicketId = (ticket) => ticket.id === id;
-    setSelectedTicket(ticketData.filter(thisTicketId));
-  };
-
-  const toggleSearchForm = () => {
-    setSearchForm(searchForm ? false : true);
+    const [ticketSelection] = tickets.filter((ticket) => ticket.id === id);
+    setSelectedTicket(ticketSelection);
   };
 
   useEffect(() => {
     console.log(consoleGreeting());
+    setTickets([...dummyData]);
   }, []);
+
+  useEffect(() => {
+    tickets.length > 1 && setSelectedTicket(tickets[0]);
+  }, [tickets]);
+
+  console.log(selectedTicket);
 
   return (
     <div className="App">
-      <Ticket ticket={selectedTicket} />
-      <TicketsList tickets={ticketData} onClick={selectTicket} />
-      <SearchArea
-        searchTickets={searchTickets}
-        searchForm={searchForm}
-        toggleSearch={toggleSearchForm}
-        clearSearch={clearSearch}
-      />
+      {selectedTicket && <Ticket {...selectedTicket} />}
+      {tickets.length > 0 && (
+        <TicketsList tickets={tickets} onClick={selectTicket} />
+      )}
+      <SearchArea searchTickets={searchTickets} clearSearch={clearSearch} />
     </div>
   );
 };
