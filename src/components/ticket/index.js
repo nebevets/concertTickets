@@ -1,7 +1,20 @@
-import "./ticket.css";
-import React from "react";
+// @flow
 
-const Ticket = ({ id, src, artists, venue, city, state, setlist, notes }) => (
+import type { TicketType } from "../../dummy_data/data";
+
+import "./ticket.css";
+import * as React from "react";
+
+const Ticket = ({
+  id,
+  src,
+  artists,
+  venue,
+  city,
+  state,
+  setlist,
+  notes,
+}: TicketType): React.Node => (
   <div className="ticket">
     <img className="activeStub" src={src} alt="selected ticket stub" />
     <div className="description">

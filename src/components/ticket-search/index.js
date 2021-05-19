@@ -1,18 +1,28 @@
+// @flow
+
 import "./ticket-search.css";
-import React, { useState } from "react";
+import * as React from "react";
+import { useState } from "react";
 
-const SearchArea = ({ searchTickets, clearSearch }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [artistInput, setArtistInput] = useState({ artist: "" });
+type Props = { searchTickets: (string) => void, clearSearch: () => void };
+type ArtistType = { artist: string };
 
-  const toggleSearchForm = () => {
+const TicketSearch = ({ searchTickets, clearSearch }: Props): React.Node => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [artistInput, setArtistInput] = useState<ArtistType>({
+    artist: "",
+  });
+
+  const toggleSearchForm = (): void => {
     setIsExpanded(isExpanded ? false : true);
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
+  const handleInputChange = (
+    event: SyntheticInputEvent<HTMLInputElement>
+  ): void => {
+    const { value } = event.target;
     setArtistInput({
-      [name]: value,
+      artist: value,
     });
   };
 
@@ -22,7 +32,7 @@ const SearchArea = ({ searchTickets, clearSearch }) => {
       {isExpanded && (
         <form
           className="searchForm"
-          onSubmit={(event) => {
+          onSubmit={(event: SyntheticEvent<HTMLFormElement>): void => {
             event.preventDefault();
             searchTickets(artistInput.artist.toLowerCase());
           }}
@@ -55,4 +65,4 @@ const SearchArea = ({ searchTickets, clearSearch }) => {
   );
 };
 
-export default SearchArea;
+export default TicketSearch;

@@ -1,8 +1,15 @@
-export const consoleGreeting = () => {
+// @flow
+
+const defaultGreeting: string = "thanks for looking...";
+
+export const consoleGreeting = (): string => {
   const now = new Date();
   const regExpGreeting = /^(\d+):.+([APM]{2})$/i;
   const timeOfDay = now.toLocaleTimeString().match(regExpGreeting);
   let partOfDay = "day";
+  if (timeOfDay === null) {
+    return defaultGreeting;
+  }
   switch (timeOfDay[2]) {
     case "AM":
       switch (Number(timeOfDay[1])) {
@@ -45,6 +52,7 @@ export const consoleGreeting = () => {
       }
       break;
     default:
+      return defaultGreeting;
   }
   return `good ${partOfDay}...`;
 };

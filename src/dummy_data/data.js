@@ -1,3 +1,19 @@
+// @flow
+
+export type TicketType = {
+  id: number,
+  tour: string,
+  artists: Array<string>,
+  date: Date,
+  venue: string,
+  city: string,
+  state: string,
+  src: string,
+  setlist: ?string,
+  notes: string,
+};
+
+/* $FlowIgnore[signature-verification-failure] webpack require context method */
 export const importImages = (requireImage) => {
   const imagePaths = {};
   requireImage
@@ -9,9 +25,10 @@ export const importImages = (requireImage) => {
   return imagePaths;
 };
 
+/* $FlowIgnore[prop-missing] webpack require context method */
 const stubImages = importImages(require.context("../images", false, /\.png/));
 
-export const dummyData = [
+export const dummyData: Array<TicketType> = [
   {
     id: 1,
     tour: "in a different light",
