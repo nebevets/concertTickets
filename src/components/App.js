@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { dummyData } from "../dummy_data/data";
 import Ticket from "./ticket";
-import TicketsList from "./ticket-list";
+import TicketList from "./ticket-list";
 import SearchArea from "./ticket-search";
 import { consoleGreeting } from "../helpers";
 
@@ -12,16 +12,15 @@ const App = () => {
 
   const clearSearch = () => {
     setTickets([...dummyData]);
-    setSelectedTicket(tickets[0]);
   };
 
-  const searchTickets = (artistName) => {
-    const artistSearch = new RegExp(artistName);
+  const searchTickets = (searchText) => {
+    const artistSearch = new RegExp(searchText);
     const filteredData = tickets.filter((ticket) =>
-      ticket.artists.join(",").match(artistSearch)
+      JSON.stringify(ticket).match(artistSearch)
     );
-    if (!filteredData.length || artistName === "") {
-      setTickets(tickets);
+    if (!filteredData.length || searchText === "") {
+      clearSearch();
     } else {
       setTickets(filteredData);
     }
@@ -41,13 +40,11 @@ const App = () => {
     tickets.length > 1 && setSelectedTicket(tickets[0]);
   }, [tickets]);
 
-  console.log(selectedTicket);
-
   return (
     <div className="App">
       {selectedTicket && <Ticket {...selectedTicket} />}
       {tickets.length > 0 && (
-        <TicketsList tickets={tickets} onClick={selectTicket} />
+        <TicketList tickets={tickets} onClick={selectTicket} />
       )}
       <SearchArea searchTickets={searchTickets} clearSearch={clearSearch} />
     </div>
