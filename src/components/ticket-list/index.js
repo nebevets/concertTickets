@@ -1,15 +1,17 @@
-import './ticket-list.css';
-import React from 'react';
+import "./ticket-list.css";
+import React from "react";
 
-const TicketList = ({tickets, images, onClick}) =>
-  <ul className="ticketList">
-    {
-      tickets.map(ticket => 
-        <li key={ticket.id}>
-          <img src={images[ticket.stub].default} alt={ticket.tour} onClick={() => onClick(ticket.id)} />
+const TicketList = ({ tickets, onClick }) => {
+  console.log(tickets);
+  return (
+    <ul className="ticketList">
+      {tickets.map(({ id, src, tour }) => (
+        <li key={id}>
+          <img src={src} alt={tour} onClick={() => onClick(id)} />
         </li>
-      )
-    }
-  </ul>
+      ))}
+    </ul>
+  );
+};
 
 export default TicketList;
