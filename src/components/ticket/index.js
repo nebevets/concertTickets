@@ -6,17 +6,17 @@ import "./ticket.css";
 import * as React from "react";
 
 const Ticket = ({
-  id,
-  src,
   artists,
-  venue,
   city,
-  state,
-  setlist,
+  id,
   notes,
+  setlist,
+  src,
+  state,
+  venue,
 }: TicketType): React.Node => (
   <div className="ticket">
-    <img className="activeStub" src={src} alt="selected ticket stub" />
+    <img alt="selected ticket stub" className="activeStub" src={src} />
     <div className="description">
       <div className="artists">
         {artists.map((artist, index) => (
@@ -29,7 +29,7 @@ const Ticket = ({
       <div className="notes">{notes}</div>
       {setlist && (
         <div className="setlist">
-          <a href={setlist} target="_blank" rel="noopener noreferrer">
+          <a href={setlist} rel="noopener noreferrer" target="_blank">
             View Setlist
           </a>
         </div>

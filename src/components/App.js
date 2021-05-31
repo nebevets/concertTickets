@@ -12,23 +12,19 @@ import TicketSearch from "./ticket-search";
 import { consoleGreeting } from "../helpers";
 
 const App = (): React.Node => {
-  const [tickets, setTickets] = useState<Array<TicketType>>([]);
   const [selectedTicket, setSelectedTicket] = useState<?TicketType>(null);
+  const [tickets, setTickets] = useState<Array<TicketType>>([]);
 
-  const clearSearch = () => {
-    setTickets([...dummyData]);
-  };
+  const resetTickets = () => setTickets([...dummyData]);
 
   const searchTickets = (searchText: string): void => {
     const artistSearch = RegExp(searchText);
-    const filteredData = tickets.filter((ticket) =>
+    const filteredTickets = tickets.filter((ticket) =>
       JSON.stringify(ticket).match(artistSearch)
     );
-    if (!filteredData.length || searchText === "") {
-      clearSearch();
-    } else {
-      setTickets(filteredData);
-    }
+    !filteredTickets.length || searchText === ""
+      ? resetTickets()
+      : setTickets([...filteredTickets]);
   };
 
   const selectTicket = (id: number): void => {
@@ -42,16 +38,16 @@ const App = (): React.Node => {
   }, []);
 
   useEffect(() => {
-    tickets.length > 1 && setSelectedTicket(tickets[0]);
+    tickets.length > 0 && setSelectedTicket(tickets[0]);
   }, [tickets]);
 
   return (
     <div className="App">
       {selectedTicket && <Ticket {...selectedTicket} />}
       {tickets.length > 0 && (
-        <TicketList tickets={tickets} onClick={selectTicket} />
+        <TicketList onClick={selectTicket} tickets={tickets} />
       )}
-      <TicketSearch searchTickets={searchTickets} clearSearch={clearSearch} />
+      <TicketSearch clearSearch={resetTickets} searchTickets={searchTickets} />
     </div>
   );
 };

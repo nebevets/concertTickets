@@ -6,16 +6,16 @@ import "./ticket-list.css";
 import * as React from "react";
 
 type Props = {
-  tickets: Array<TicketType>,
   onClick: (number) => void,
+  tickets: Array<TicketType>,
 };
 
-const TicketList = ({ tickets, onClick }: Props): React.Node => {
+const TicketList = ({ onClick, tickets }: Props): React.Node => {
   return (
     <ul className="ticketList">
       {tickets.map(({ id, src, tour }) => (
         <li key={id}>
-          <img src={src} alt={tour} onClick={() => onClick(id)} />
+          <img alt={tour} onClick={() => onClick(id)} src={src} />
         </li>
       ))}
     </ul>
