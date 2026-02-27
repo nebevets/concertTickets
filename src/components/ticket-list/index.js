@@ -1,5 +1,4 @@
 import "./ticket-list.css";
-import * as React from "react";
 
 const TicketList = ({ onClick, tickets }) => {
   return (
