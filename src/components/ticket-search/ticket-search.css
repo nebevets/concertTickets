@@ -10,34 +10,40 @@
 .searchArea > * {
   vertical-align: middle;
 }
-.searchForm, .magnifier{
+.searchForm,
+.magnifier {
   display: inline-block;
 }
-.magnifier{
+.magnifier {
   background-image: url(search_icon.png);
   background-size: 1em;
   height: 1em;
   cursor: pointer;
 }
-.clearSearch{
+.clearSearch {
   font-weight: bold;
   background-color: transparent;
   border: none;
   padding: 0;
 }
-.magnifier, .clearSearch{
+.magnifier,
+.clearSearch {
   width: 1em;
   margin: 0.25em;
 }
 .searchInput {
   animation: materialize 1.25s;
 }
-.clearSearch, .searchInput{
+.clearSearch,
+.searchInput {
   color: #6c6c6c;
   font-size: 0.75em;
-
 }
 @keyframes materialize {
-  from {opacity: 0.001}
-  to {opacity: 1}
+  from {
+    opacity: 0.001;
+  }
+  to {
+    opacity: 1;
+  }
 }

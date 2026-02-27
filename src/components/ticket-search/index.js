@@ -1,23 +1,17 @@
-// @flow
-
 import "./ticket-search.css";
 import * as React from "react";
 import { useState } from "react";
 
-type Props = { clearSearch: () => void, searchTickets: (string) => void };
+const TicketSearch = ({ clearSearch, searchTickets }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
-const TicketSearch = ({ clearSearch, searchTickets }: Props): React.Node => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [searchInput, setSearchInput] = useState<string>("");
-
-  const handleInputChange = (
-    event: SyntheticInputEvent<HTMLInputElement>
-  ): void => {
+  const handleInputChange = (event) => {
     const { value } = event.target;
     setSearchInput(value);
   };
 
-  const toggleSearchForm = (): void => setIsExpanded(!isExpanded);
+  const toggleSearchForm = () => setIsExpanded(!isExpanded);
 
   return (
     <div className="searchArea" onBlur={toggleSearchForm}>
@@ -26,7 +20,7 @@ const TicketSearch = ({ clearSearch, searchTickets }: Props): React.Node => {
         <form
           autoComplete="off"
           className="searchForm"
-          onSubmit={(event: SyntheticEvent<HTMLFormElement>): void => {
+          onSubmit={(event) => {
             event.preventDefault();
             searchTickets(searchInput.toLowerCase());
           }}

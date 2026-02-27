@@ -1,4 +1,4 @@
-.ticketList{
+.ticketList {
   margin: 0;
   list-style-type: none;
   position: absolute;
@@ -7,6 +7,6 @@
   cursor: pointer;
   padding: 2px;
 }
-.ticketList li > img{
+.ticketList li > img {
   width: 100%;
 }
