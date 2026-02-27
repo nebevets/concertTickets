@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { dummyData } from "../dummy_data/data";
@@ -9,28 +8,39 @@ import { consoleGreeting } from "../helpers";
 
 const App = () => {
   const [selectedTicket, setSelectedTicket] = useState(null);
-  const [tickets, setTickets] = useState([]);
+  const [tickets, setTickets] = useState(dummyData);
 
-  const resetTickets = () => setTickets([...dummyData]);
+  const resetTickets = () => setTickets(dummyData);
 
   const searchTickets = (searchText) => {
-    const artistSearch = RegExp(searchText);
-    const filteredTickets = tickets.filter((ticket) =>
-      JSON.stringify(ticket).match(artistSearch),
-    );
-    !filteredTickets.length || searchText === ""
-      ? resetTickets()
-      : setTickets([...filteredTickets]);
+    if (!searchText.trim()) {
+      setTickets(dummyData);
+      return;
+    }
+
+    const lowerSearch = searchText.toLowerCase();
+    const filtered = dummyData.filter((ticket) => {
+      const searchFields = [
+        ticket.tour,
+        ticket.venue,
+        ticket.city,
+        ...ticket.artists,
+      ];
+      return searchFields.some((field) =>
+        field?.toLowerCase().includes(lowerSearch),
+      );
+    });
+
+    setTickets(filtered.length > 0 ? filtered : dummyData);
   };
 
   const selectTicket = (id) => {
-    const [ticketSelection] = tickets.filter((ticket) => ticket.id === id);
+    const ticketSelection = tickets.find((ticket) => ticket.id === id);
     setSelectedTicket(ticketSelection);
   };
 
   useEffect(() => {
     console.log(consoleGreeting());
-    setTickets([...dummyData]);
   }, []);
 
   useEffect(() => {
