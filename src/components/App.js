@@ -1,7 +1,3 @@
-// @flow
-
-import type { TicketType } from "../dummy_data/data";
-
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./App.css";
@@ -11,23 +7,23 @@ import TicketList from "./ticket-list";
 import TicketSearch from "./ticket-search";
 import { consoleGreeting } from "../helpers";
 
-const App = (): React.Node => {
-  const [selectedTicket, setSelectedTicket] = useState<?TicketType>(null);
-  const [tickets, setTickets] = useState<Array<TicketType>>([]);
+const App = () => {
+  const [selectedTicket, setSelectedTicket] = useState(null);
+  const [tickets, setTickets] = useState([]);
 
   const resetTickets = () => setTickets([...dummyData]);
 
-  const searchTickets = (searchText: string): void => {
+  const searchTickets = (searchText) => {
     const artistSearch = RegExp(searchText);
     const filteredTickets = tickets.filter((ticket) =>
-      JSON.stringify(ticket).match(artistSearch)
+      JSON.stringify(ticket).match(artistSearch),
     );
     !filteredTickets.length || searchText === ""
       ? resetTickets()
       : setTickets([...filteredTickets]);
   };
 
-  const selectTicket = (id: number): void => {
+  const selectTicket = (id) => {
     const [ticketSelection] = tickets.filter((ticket) => ticket.id === id);
     setSelectedTicket(ticketSelection);
   };

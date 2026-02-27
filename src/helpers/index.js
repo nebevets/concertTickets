@@ -1,8 +1,6 @@
-// @flow
+const defaultGreeting = "thanks for looking...";
 
-const defaultGreeting: string = "thanks for looking...";
-
-export const consoleGreeting = (): string => {
+export const consoleGreeting = () => {
   const now = new Date();
   const regExpGreeting = /^(\d+):.+([APM]{2})$/i;
   const timeOfDay = now.toLocaleTimeString().match(regExpGreeting);
